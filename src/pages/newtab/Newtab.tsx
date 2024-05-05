@@ -8,7 +8,8 @@ export default function Newtab(): JSX.Element {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/pages/newtab/Newtab.tsx</code> and save to reload.
+          Edit <code>src/pages/newtab/Newtab.tsx</code>
+          and saveeee to reload.
         </p>
         <a
           className="App-link"
