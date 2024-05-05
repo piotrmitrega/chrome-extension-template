@@ -6,6 +6,10 @@
   "icons": {
     "128": "public/dev-icon-128.png"
   },
+  "permissions": [
+    "activeTab",
+    "identity"
+  ],
   "web_accessible_resources": [
     {
       "resources": [
