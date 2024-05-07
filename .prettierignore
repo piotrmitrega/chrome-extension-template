@@ -1,0 +1,6 @@
+android/
+node_modules/
+ios/
+package-lock.json
+yarn.lock
+package.json
