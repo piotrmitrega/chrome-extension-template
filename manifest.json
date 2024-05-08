@@ -18,13 +18,13 @@
   "chrome_url_overrides": {
     "newtab": "src/pages/newtab/index.html"
   },
-  "content_security_policy":"script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'",
   "icons": {
     "128": "icon-128.png"
   },
   "permissions": [
     "activeTab",
-    "identity"
+    "identity",
+    "storage"
   ],
   "oauth2": {
     "client_id": "743478732958-sgc3mpqin5nqhuo415jitq5g6968vaun.apps.googleusercontent.com",

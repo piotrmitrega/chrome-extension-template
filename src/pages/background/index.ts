@@ -1,16 +1,9 @@
-console.log('background script loaded');
+import { authenticateFromCache } from "@src/auth/authenticateFromCache";
 
-(async () => {
-  const [tab] = await chrome.tabs.query({active: true, lastFocusedWindow: true});
-  if(!tab) {
-    console.error("No tab?")
-    return;
-  }
+console.log("background script loaded", new Date().toString());
 
-  const response = await chrome.tabs.sendMessage(Number(tab.id), {greeting: "hello"});
-  // do something with response here, not outside the function
-  console.log(response);
-})();
+authenticateFromCache();
 
-// console.log(chrome.identity.getAccounts())
-console.log("Co tam")
+chrome.runtime.onMessage.addListener((message) => {
+  console.log("Message received in background", message);
+});
