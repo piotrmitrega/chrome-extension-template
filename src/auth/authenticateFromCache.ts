@@ -1,5 +1,6 @@
 import { firebaseGoogleSignIn } from "@src/firebase/firebaseGoogleSignIn";
 import { firebaseCredentialsToUser } from "@src/auth/firebaseCredentialsToUser";
+import { setStorageItem } from "@src/storage";
 
 export const authenticateFromCache = async () => {
   console.log("Trying to authenticate from cache");
@@ -16,9 +17,7 @@ export const authenticateFromCache = async () => {
 
     console.log("Successfully authenticated from cache", user);
 
-    await chrome.storage.sync.set({ user });
-
-    console.log("Saved user in cache");
+    await setStorageItem("user", user);
   } catch (error) {
     console.error("Could not sign in to firebase from cache", error);
   }
