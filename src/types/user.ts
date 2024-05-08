@@ -3,4 +3,4 @@ export type User = {
   id: string;
   photoUrl: string;
   displayName: string;
-}
+};
