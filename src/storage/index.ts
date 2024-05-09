@@ -7,7 +7,9 @@ export type StorageData = {
 export const getStorageItem = async <TKey extends keyof StorageData>(
   key: TKey,
 ): Promise<StorageData[TKey]> => {
-  return (await chrome.storage.sync.get(key)) as StorageData[TKey];
+  const cache = (await chrome.storage.sync.get(key)) as Pick<StorageData, TKey>;
+
+  return cache[key];
 };
 
 export const setStorageItem = async <TKey extends keyof StorageData>(
