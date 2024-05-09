@@ -1,8 +1,6 @@
 import React from "react";
-import { useSignOut } from "@src/roots/popup/hooks/useSignOut";
+import { firebaseSignOut } from "@src/firebase/firebaseSignOut";
 
 export const SignOutButton = (): JSX.Element => {
-  const signOut = useSignOut();
-
-  return <button onClick={signOut}>Sign out</button>;
+  return <button onClick={firebaseSignOut}>Sign out</button>;
 };

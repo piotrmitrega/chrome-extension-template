@@ -1,7 +1,7 @@
-import { useUserStore } from "@src/roots/popup/state/user";
+import { getFirebaseAuth } from "@src/firebase/getFirebaseAuth";
 
 export const useCurrentUser = () => {
-  const user = useUserStore((state) => state.user);
+  const user = getFirebaseAuth().currentUser;
 
   if (!user) {
     throw new Error("Use this hook in signed in context");

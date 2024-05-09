@@ -1,8 +1,6 @@
 import { firebaseGoogleSignIn } from "@src/firebase/firebaseGoogleSignIn";
-import { firebaseCredentialsToUser } from "@src/auth/firebaseCredentialsToUser";
-import { User } from "@src/types/user";
 
-export const signIn = async (): Promise<User | null> => {
+export const signIn = async () => {
   console.log("Trying to authenticate from cache");
 
   const { token } = await chrome.identity.getAuthToken({ interactive: true });
@@ -13,13 +11,8 @@ export const signIn = async (): Promise<User | null> => {
 
   try {
     const firebaseUserCredential = await firebaseGoogleSignIn(token);
-    const user = firebaseCredentialsToUser(firebaseUserCredential);
 
-    console.log("Successfully authenticated", user);
-
-    await chrome.storage.sync.set({ user });
-
-    return user;
+    console.log("Successfully authenticated", firebaseUserCredential);
   } catch (error) {
     console.error("Could not sign in to firebase", error);
     return null;

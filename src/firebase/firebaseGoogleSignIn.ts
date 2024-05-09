@@ -1,10 +1,9 @@
-import { getFirebaseApp } from "@src/firebase/getFirebaseApp";
-import { getAuth, GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+import { getFirebaseAuth } from "@src/firebase/getFirebaseAuth";
 
 export const firebaseGoogleSignIn = async (googleToken: string) => {
-  const firebaseApp = getFirebaseApp();
   const credential = GoogleAuthProvider.credential(null, googleToken);
-  const auth = getAuth(firebaseApp);
+  const auth = getFirebaseAuth();
 
   return signInWithCredential(auth, credential);
 };

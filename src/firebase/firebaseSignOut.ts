@@ -1,11 +1,10 @@
-import { getFirebaseApp } from "@src/firebase/getFirebaseApp";
-import { getAuth, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
+import { getFirebaseAuth } from "@src/firebase/getFirebaseAuth";
 
 export const firebaseSignOut = async () => {
   console.log("Signing out from firebase");
 
-  const firebaseApp = getFirebaseApp();
-  const auth = getAuth(firebaseApp);
+  const auth = getFirebaseAuth();
 
   return signOut(auth);
 };
