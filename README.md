@@ -79,13 +79,13 @@ The template includes **all** of the Chrome extension pages. You will likely hav
 
 E.g. you don't want the newtab page to activate whenever you open a new tab:
 1. remove the directory `newtab` and its contents in `src/pages`
-2. remove `chrome_url_overrides: { newtab: 'src/pages/newtab/index.html' },` in `manifest.json`
+2. remove `chrome_url_overrides: { newtab: 'src/roots/newtab/index.html' },` in `manifest.json`
 
 If you need to declare extra HTML pages beyond those the manifest accommodates, place them in the Vite config under build.rollupOptions.input.
 
 This example includes a welcome page to open when the user installs the extension.
 
-CSS files in the `src/pages/*` directories are not necessary. They are left in there in case you want 
+CSS files in the `src/roots/*` directories are not necessary. They are left in there in case you want 
 to use it in combination with Tailwind CSS. **Feel free to delete them**.
 
 Tailwind can be configured as usual in the `tailwind.config.cjs` file. See doc link below.
