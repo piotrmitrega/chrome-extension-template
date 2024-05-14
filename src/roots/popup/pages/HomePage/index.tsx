@@ -3,6 +3,8 @@ import { useCurrentUser } from "@src/roots/popup/hooks/useCurrentUser";
 import { SignOutButton } from "@src/roots/popup/components/SignOutButton";
 import { ContentScriptCommandType, PopupCommandType } from "@src/consts/commands";
 import { PickModeCompletedCommand } from "@src/types/commands";
+import { PageProductData } from "@src/roots/popup/components/PageProductData";
+import { useCheckCurrentPageProductSelectors } from "@src/roots/popup/hooks/useCheckCurrentPageProductSelectors";
 // import { htmlToText } from "html-to-text";
 //
 // function getPageHtml() {
@@ -13,6 +15,8 @@ import { PickModeCompletedCommand } from "@src/types/commands";
 
 export const HomePage = (): JSX.Element => {
   const user = useCurrentUser();
+
+  useCheckCurrentPageProductSelectors();
 
   useEffect(() => {
     chrome.runtime.onMessage.addListener((message) => {
@@ -63,6 +67,7 @@ export const HomePage = (): JSX.Element => {
 
   return (
     <div className="absolute top-0 left-0 right-0 bottom-0 text-center h-full p-3">
+      <PageProductData />
       Signed in as {user?.displayName}
       <SignOutButton />
       <button onClick={setPickMode}>GET HTML</button>
