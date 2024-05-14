@@ -9,7 +9,7 @@ export const useSignIn = () => {
     const user = await signIn();
 
     if (user) {
-      navigate(RoutePath.Home);
+      navigate(RoutePath.HOME);
     }
   };
 };

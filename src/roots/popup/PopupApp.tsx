@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useRouteProtection } from "@src/roots/popup/hooks/useRouteProtection";
+import React, { useState } from "react";
 import { MemoryRouter, Route, Routes } from "react-router";
 import { SignInPage } from "@src/roots/popup/pages/SignInPage";
 import { HomePage } from "@src/roots/popup/pages/HomePage";
@@ -10,14 +9,14 @@ import { RoutePath } from "@src/roots/popup/constants/routePath";
 
 export default function PopupApp(): JSX.Element {
   const [isLoading, setLoading] = useState(true);
-  const [initialRoute, setInitialRoute] = useState<string>(RoutePath.Home);
+  const [initialRoute, setInitialRoute] = useState<string>(RoutePath.HOME);
 
   useEffectAsync(async () => {
     const auth = getFirebaseAuth();
     await auth.authStateReady();
 
     setLoading(false);
-    setInitialRoute(auth.currentUser ? RoutePath.Home : RoutePath.SignIn);
+    setInitialRoute(auth.currentUser ? RoutePath.HOME : RoutePath.SIGN_IN);
   }, []);
 
   if (isLoading) {

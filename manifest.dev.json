@@ -9,7 +9,8 @@
   "permissions": [
     "activeTab",
     "identity",
-    "storage"
+    "storage",
+    "scripting"
   ],
   "web_accessible_resources": [
     {

@@ -14,15 +14,18 @@
   "type": "module",
   "dependencies": {
     "firebase": "^10.11.1",
+    "html-to-text": "^9.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.23.0",
     "webextension-polyfill": "^0.10.0",
+    "xpath": "^0.0.34",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.0-beta.23",
     "@types/chrome": "^0.0.253",
+    "@types/html-to-text": "^9.0.4",
     "@types/node": "^18.17.1",
     "@types/react": "^18.2.39",
     "@types/react-dom": "^18.2.17",
