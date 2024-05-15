@@ -21,17 +21,22 @@ export const useGetPageProductData = (): UseGetPageProductData => {
 
   useEffectAsync(async () => {
     const tab = await getActiveTab();
-    const stringifiedProductData = await getProductDataFromPage(tab.id!, selectors!);
 
-    const rawProductData = JSON.parse(stringifiedProductData) as Partial<PageProductData>;
+    try {
+      const stringifiedProductData = await getProductDataFromPage(tab.id!, selectors!);
+      const rawProductData = JSON.parse(stringifiedProductData) as Partial<PageProductData>;
 
-    if (!validatePageProductData(rawProductData)) {
-      console.error("Could not fetch page product data", rawProductData, selectors);
+      if (!validatePageProductData(rawProductData)) {
+        console.error("Could not fetch page product data", rawProductData, selectors);
+        setFailed(true);
+      } else {
+        console.log("Fetched valid product data!", rawProductData);
+
+        setPageProductData(rawProductData);
+      }
+    } catch (error) {
+      console.log("Failed to get product data", error);
       setFailed(true);
-    } else {
-      console.log("Fetched valid product data!", rawProductData);
-
-      setPageProductData(rawProductData);
     }
 
     setLoading(false);
