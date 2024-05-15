@@ -1,8 +1,10 @@
 import { getActiveTab } from "@src/chrome/tabs";
 import { useEffectAsync } from "@src/common/hooks/useEffectAsync";
-import { usePageProductSelectors } from "@src/roots/popup/state/hostConfiguration";
+import { usePageProductSelectors } from "@src/roots/popup/state/pageProductSelectors";
 import { getCachedProductSelector } from "@src/chrome/cachedSelectors";
 import { ProductSelectors } from "@src/types/selectors";
+import { validatePageProductData } from "@src/utils/validatePageProductData";
+import { validateProductSelectors } from "@src/utils/validateProductSelectors";
 
 const fakeSelectors: ProductSelectors = {
   price: {
@@ -29,14 +31,19 @@ export const useCheckCurrentPageProductSelectors = () => {
   useEffectAsync(async () => {
     const activeTab = await getActiveTab();
 
-    console.log("ACTIVE TAB", activeTab);
-
     const url = new URL(activeTab.url!);
     const { hostname } = url;
 
     const storedProductSelectors = await performLookupInDb(hostname);
     if (storedProductSelectors) {
-      setSelectors(storedProductSelectors);
+      if (!validateProductSelectors(storedProductSelectors)) {
+        console.warn("Cached selectors are incomplete. Will ask user to fill them in");
+        setSelectors(undefined);
+      } else {
+        console.log("Found valid product selectors in cache");
+        setSelectors(storedProductSelectors);
+      }
+
       return;
     }
 
