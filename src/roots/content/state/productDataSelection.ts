@@ -3,12 +3,12 @@ import { PageProductDataWithSelectors } from "@src/types/pageProductDataWithSelc
 import { PageProductData } from "@src/types/pageProductData";
 import { ProductSelectors } from "@src/types/selectors";
 
-type ProductSelection = {
+type ProductDataSelection = {
   values: Partial<PageProductDataWithSelectors>;
   setValue: (key: keyof PageProductData, readValue: string, selectors: ProductSelectors) => void;
 };
 
-export const useProductSelection = create<ProductSelection>((set, getState) => ({
+export const useProductDataSelection = create<ProductDataSelection>((set, getState) => ({
   values: {},
   setValue: (key: keyof PageProductData, readValue: string, selectors: ProductSelectors) => {
     const { values } = getState();

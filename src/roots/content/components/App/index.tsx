@@ -1,6 +1,6 @@
 import React from "react";
 import { useListenToContentCommands } from "@src/roots/content/hooks/useListenToContentCommands";
-import { ProductSelectionView } from "@src/roots/content/views/ProductSelectionView"; // Assuming styles.css is in the same directory
+import { ProductDataSelectionView } from "@src/roots/content/views/ProductDataSelectionView"; // Assuming styles.css is in the same directory
 import "./style.css";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
 
   console.log("app");
 
-  return <ProductSelectionView />;
+  return <ProductDataSelectionView />;
 }
 
 export default App;

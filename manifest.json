@@ -41,6 +41,9 @@
       ],
       "js": [
         "src/roots/content/index.tsx"
+      ],
+      "css": [
+        "contentStyle-injected.css"
       ]
     }
   ],

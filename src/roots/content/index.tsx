@@ -48,6 +48,6 @@ shadowRoot.appendChild(documentCSS);
 console.log("Siemano");
 root.render(
   <React.StrictMode>
-    <App shadowRoot={shadowRoot} />
+    <App />
   </React.StrictMode>,
 );
