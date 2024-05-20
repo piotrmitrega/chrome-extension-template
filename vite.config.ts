@@ -10,6 +10,7 @@ import pkg from "./package.json";
 
 const root = resolve(__dirname, "src");
 const assetsDir = resolve(root, "assets");
+const shadcdnDir = resolve(__dirname, "@");
 const outDir = resolve(__dirname, "dist");
 const publicDir = resolve(__dirname, "public");
 
@@ -46,6 +47,7 @@ function stripDevIcons(apply: boolean) {
 export default defineConfig({
   resolve: {
     alias: {
+      "@": shadcdnDir,
       "@src": root,
       "@assets": assetsDir,
     },
@@ -55,7 +57,7 @@ export default defineConfig({
     crx({
       manifest: extensionManifest as ManifestV3Export,
       contentScripts: {
-        injectCss: true,
+        injectCss: false,
       },
     }),
     stripDevIcons(isDev),

@@ -2,18 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-.langin{
-    color: aliceblue;
-}
-
 .__wrapper {
-    position: absolute;
+    z-index: 2147482646;
+    position: fixed;
     inset: 0;
     pointer-events: none;
-}
-
-.__wrapper_active {
-    pointer-events: all;
 }
 
 .brevy-hover {
