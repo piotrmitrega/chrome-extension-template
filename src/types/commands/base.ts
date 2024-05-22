@@ -1,8 +1,16 @@
 import { BackgroundCommandType, ContentCommandType, PopupCommandType } from "@src/consts/commands";
 
-export class ExtensionCommand<TPayload = undefined> {
-  constructor(
+export abstract class ExtensionCommand {
+  protected constructor(
     public readonly type: ContentCommandType | PopupCommandType | BackgroundCommandType,
-    public readonly payload?: TPayload,
   ) {}
+}
+
+export abstract class PayloadExtensionCommand<TPayload> extends ExtensionCommand {
+  protected constructor(
+    type: ContentCommandType | PopupCommandType | BackgroundCommandType,
+    public readonly payload: TPayload,
+  ) {
+    super(type);
+  }
 }

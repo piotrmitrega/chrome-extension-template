@@ -3,3 +3,5 @@ export type PageProductData = {
   price: string;
   unit: string;
 };
+
+export type PageProductDataKey = keyof PageProductData;

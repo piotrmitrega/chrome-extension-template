@@ -1,12 +1,9 @@
 import { PageProductData } from "@src/types/pageProductData";
-import { ProductSelectors } from "@src/types/selectors";
+import { ElementSelector } from "@src/types/selectors";
 
-export type PageProductDataFieldWithSelectors = {
+export type PageProductDataFieldSelectors = {
   readValue: string;
-  selectors: ProductSelectors;
+  selector: ElementSelector;
 };
 
-export type PageProductDataWithSelectors = Record<
-  keyof PageProductData,
-  PageProductDataFieldWithSelectors
->;
+export type PageProductDataSelectors = Record<keyof PageProductData, PageProductDataFieldSelectors>;

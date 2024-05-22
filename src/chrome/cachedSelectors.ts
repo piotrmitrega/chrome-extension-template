@@ -4,16 +4,16 @@ import { ProductSelectors } from "@src/types/selectors";
 const getProductSelectorCacheKey = (urlWithoutQuery: string) =>
   `product-selector-${encodeURIComponent(urlWithoutQuery)}`;
 
-export const getCachedProductSelector = async (
+export const getCachedProductSelectors = async (
   urlWithoutQuery: string,
-): Promise<ProductSelectors | undefined> => {
+): Promise<Partial<ProductSelectors> | undefined> => {
   const key = getProductSelectorCacheKey(urlWithoutQuery);
   return getStorageItem<ProductSelectors>(key);
 };
 
-export const setCachedProductSelector = async (
+export const setCachedProductSelectors = async (
   urlWithoutQuery: string,
-  value: ProductSelectors,
+  value: Partial<ProductSelectors>,
 ): Promise<void> => {
   const key = getProductSelectorCacheKey(urlWithoutQuery);
 

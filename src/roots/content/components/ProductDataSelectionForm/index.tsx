@@ -10,9 +10,30 @@ import {
 import { Button } from "@/components/ui/button";
 import { ProductDataSelectionInput } from "@src/roots/content/components/ProductDataSelectionInput";
 import { useProductDataSelection } from "@src/roots/content/state/productDataSelection";
+import { useUiMode } from "@src/roots/content/state/uiMode";
+import { useToast } from "@/components/ui/use-toast";
 
 export const ProductDataSelectionForm = (): JSX.Element => {
+  const { toast } = useToast();
+
   const selectors = useProductDataSelection((state) => state.values);
+  const setSelectionMode = useUiMode((state) => state.setSelectionMode);
+
+  const onCancel = () => {
+    setSelectionMode(false);
+  };
+
+  const onSubmit = async () => {
+    toast({
+      title: "Saved!",
+      description: "Open the extension again to add your product!",
+      variant: "success",
+    });
+
+    setSelectionMode(false);
+  };
+
+  const hasAllSelectors = selectors["title"] && selectors["unit"] && selectors["price"];
 
   return (
     <Card className="w-[350px] absolute top-8 right-8">
@@ -21,32 +42,35 @@ export const ProductDataSelectionForm = (): JSX.Element => {
         <CardDescription>Click on appropriate elements on the page to select</CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
-          <div className="grid w-full items-center gap-4">
-            <ProductDataSelectionInput
-              readValue={selectors["title"]?.readValue}
-              selectorKey="title"
-              selectors={selectors["title"]?.selectors}
-            />
+        <div className="grid w-full items-center gap-4">
+          <ProductDataSelectionInput
+            readValue={selectors["title"]?.readValue}
+            selector={selectors["title"]?.selector}
+            selectorKey="title"
+          />
 
-            <ProductDataSelectionInput
-              readValue={selectors["price"]?.readValue}
-              selectorKey="price"
-              selectors={selectors["price"]?.selectors}
-            />
+          <ProductDataSelectionInput
+            readValue={selectors["price"]?.readValue}
+            selector={selectors["price"]?.selector}
+            selectorKey="price"
+          />
 
-            <ProductDataSelectionInput
-              readValue={selectors["unit"]?.readValue}
-              selectorKey="unit"
-              selectors={selectors["unit"]?.selectors}
-            />
-          </div>
-        </form>
+          <ProductDataSelectionInput
+            readValue={selectors["unit"]?.readValue}
+            selector={selectors["unit"]?.selector}
+            selectorKey="unit"
+          />
+        </div>
       </CardContent>
 
       <CardFooter className="flex justify-between">
-        <Button variant="outline">Cancel</Button>
-        <Button>Deploy</Button>
+        <Button variant="outline" onClick={onCancel}>
+          Cancel
+        </Button>
+
+        <Button disabled={!hasAllSelectors} onClick={onSubmit}>
+          Save 🚀
+        </Button>
       </CardFooter>
     </Card>
   );

@@ -1,5 +1,5 @@
 export type ElementSelector = {
-  xPath: string;
+  xpath: string;
   cssSelector: string;
 };
 

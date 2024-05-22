@@ -1,21 +1,21 @@
 import { create } from "zustand";
-import { PageProductDataWithSelectors } from "@src/types/pageProductDataWithSelctors";
+import { PageProductDataSelectors } from "@src/types/pageProductDataWithSelctors";
 import { PageProductData } from "@src/types/pageProductData";
-import { ProductSelectors } from "@src/types/selectors";
+import { ElementSelector } from "@src/types/selectors";
 
 type ProductDataSelection = {
-  values: Partial<PageProductDataWithSelectors>;
-  setValue: (key: keyof PageProductData, readValue: string, selectors: ProductSelectors) => void;
+  values: Partial<PageProductDataSelectors>;
+  setValue: (key: keyof PageProductData, readValue: string, selector: ElementSelector) => void;
 };
 
 export const useProductDataSelection = create<ProductDataSelection>((set, getState) => ({
   values: {},
-  setValue: (key: keyof PageProductData, readValue: string, selectors: ProductSelectors) => {
+  setValue: (key: keyof PageProductData, readValue: string, selector: ElementSelector) => {
     const { values } = getState();
 
     values[key] = {
       readValue,
-      selectors,
+      selector,
     };
 
     set({ values: { ...values } });

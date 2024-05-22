@@ -1,12 +1,18 @@
 import { ProductSelectors } from "@src/types/selectors";
-import { getElementByXpath } from "@src/utils/getElementByXpath";
 
 function fetchProductData(selectors: ProductSelectors) {
+  console.log("Fetching product data...", selectors);
+
+  const getElementByXpath = (xpath: string) => {
+    return document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
+      .singleNodeValue;
+  };
+
   const { price: priceSelector, title: titleSelector, unit: unitSelector } = selectors;
 
-  const price = getElementByXpath(priceSelector.xPath)?.textContent;
-  const title = getElementByXpath(titleSelector.xPath)?.textContent;
-  const unit = getElementByXpath(unitSelector.xPath)?.textContent;
+  const price = getElementByXpath(priceSelector.xpath)?.textContent;
+  const title = getElementByXpath(titleSelector.xpath)?.textContent;
+  const unit = getElementByXpath(unitSelector.xpath)?.textContent;
 
   return {
     price,
@@ -21,7 +27,8 @@ export const getProductDataFromPage = async (
 ): Promise<string> => {
   const injectionResults = await chrome.scripting.executeScript({
     target: { tabId },
-    func: () => fetchProductData(selectors),
+    func: fetchProductData,
+    args: [selectors],
   });
 
   return JSON.stringify(injectionResults[0].result);
