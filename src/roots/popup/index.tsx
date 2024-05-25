@@ -12,10 +12,6 @@ function init() {
 
   const root = createRoot(rootContainer);
   root.render(<PopupApp />);
-
-  chrome.runtime.onMessage.addListener((message) => {
-    console.log("Message received in popup", message);
-  });
 }
 
 init();

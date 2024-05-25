@@ -2,26 +2,8 @@ import { getActiveTab } from "@src/chrome/tabs";
 import { useEffectAsync } from "@src/common/hooks/useEffectAsync";
 import { usePageProductSelectors } from "@src/roots/popup/state/pageProductSelectors";
 import { getCachedProductSelectors } from "@src/chrome/cachedSelectors";
-import { ProductSelectors } from "@src/types/selectors";
 import { validateProductSelectors } from "@src/utils/validateProductSelectors";
-
-const fakeSelectors: ProductSelectors = {
-  price: {
-    xpath: "",
-    cssSelector: "",
-  },
-  unit: {
-    xpath: "",
-    cssSelector: "",
-  },
-  title: {
-    xpath: "",
-    cssSelector: "",
-  },
-};
-
-// TODO: Implement searching for stored selectors in db for given host
-const performLookupInDb = async (hostname: string) => Promise.resolve(undefined);
+import { getPageProductSelectorDocument } from "@src/firebase/db/pageProductSelector";
 
 export const useCheckCurrentPageProductSelectors = () => {
   const setSelectors = usePageProductSelectors((state) => state.setSelectors);
@@ -34,9 +16,11 @@ export const useCheckCurrentPageProductSelectors = () => {
       const url = new URL(activeTab.url!);
       const { hostname } = url;
 
-      const storedProductSelectors = await performLookupInDb(hostname);
+      const storedProductSelectors = await getPageProductSelectorDocument(hostname);
       if (storedProductSelectors) {
-        setSelectors(storedProductSelectors);
+        console.log("Found valid product selectors in db", storedProductSelectors);
+
+        setSelectors(storedProductSelectors.selectors);
         return;
       }
 
