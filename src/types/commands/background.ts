@@ -1,15 +1,21 @@
-import { PayloadExtensionCommand } from "@src/types/commands/base";
+import { ExtensionCommand, PayloadExtensionCommand } from "@src/types/commands/base";
 import { BackgroundCommandType } from "@src/consts/commands";
 import { PageProductDataKey } from "@src/types/pageProductData";
 import { ElementSelector } from "@src/types/selectors";
 
-export type SaveProductDataSelectorBackgroundCommandPayload = {
+export type CacheProductDataSelectorBackgroundCommandPayload = {
   key: PageProductDataKey;
   selector: ElementSelector;
 };
 
-export class SaveProductDataSelectorBackgroundCommand extends PayloadExtensionCommand<SaveProductDataSelectorBackgroundCommandPayload> {
+export class CachePageProductSelectorBackgroundCommand extends PayloadExtensionCommand<CacheProductDataSelectorBackgroundCommandPayload> {
   constructor(key: PageProductDataKey, selector: ElementSelector) {
-    super(BackgroundCommandType.SAVE_PRODUCT_DATA_SELECTOR, { key, selector });
+    super(BackgroundCommandType.CACHE_PAGE_PRODUCT_SELECTOR, { key, selector });
+  }
+}
+
+export class PersistProductDataSelectorBackgroundCommand extends ExtensionCommand {
+  constructor() {
+    super(BackgroundCommandType.PERSIST_PAGE_PRODUCT_SELECTORS);
   }
 }

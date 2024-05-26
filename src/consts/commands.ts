@@ -8,5 +8,6 @@ export enum PopupCommandType {
 }
 
 export enum BackgroundCommandType {
-  SAVE_PRODUCT_DATA_SELECTOR = "save-product-data-selector",
+  CACHE_PAGE_PRODUCT_SELECTOR = "cache-page-product-selector",
+  PERSIST_PAGE_PRODUCT_SELECTORS = "persist-page-product-selectors",
 }

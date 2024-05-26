@@ -12,7 +12,7 @@ function fetchProductData(selectors: ProductSelectors) {
 
   const price = getElementByXpath(priceSelector.xpath)?.textContent;
   const title = getElementByXpath(titleSelector.xpath)?.textContent;
-  const unit = getElementByXpath(unitSelector.xpath)?.textContent;
+  const unit = unitSelector ? getElementByXpath(unitSelector.xpath)?.textContent : undefined;
 
   return {
     price,

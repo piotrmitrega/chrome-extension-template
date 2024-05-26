@@ -5,7 +5,10 @@ import {
   DbPageProductSelectorsDocumentData,
 } from "@src/types/db/selectors";
 import { getBaseConverter } from "@src/firebase/db/base";
-import { setDoc } from "firebase/firestore";
+import { setDoc, Timestamp } from "firebase/firestore";
+import { DbBaseDocumentConverted } from "@src/types/db/base";
+import { ProductSelectors } from "@src/types/selectors";
+import { User } from "@firebase/auth";
 
 const getDocument = (hostname: string) => {
   return doc(getFirebaseDb(), "pageProductSelectors", hostname);
@@ -26,11 +29,34 @@ export const getPageProductSelectorDocument = async (
 };
 
 export const upsertPageProductSelectorDocument = async (
-  payload: DbPageProductSelectorsDocumentData,
+  urlWithoutQuery: string,
+  selectors: ProductSelectors,
+  user: User,
 ): Promise<void> => {
-  const documentRef = getDocument(payload.hostname).withConverter(
+  const url = new URL(urlWithoutQuery);
+
+  const documentRef = getDocument(url.hostname).withConverter(
     getBaseConverter<DbPageProductSelectorsDocumentData>(),
   );
+
+  const payload: DbBaseDocumentConverted<DbPageProductSelectorsDocument> = {
+    hostname: url.hostname,
+    sourceUrl: urlWithoutQuery,
+    selectors,
+    updatedBy: user.uid,
+    createdBy: user.uid,
+    createdAt: Timestamp.now().toDate(),
+    updatedAt: Timestamp.now().toDate(),
+  };
+
+  const documentValue = await getDoc(documentRef);
+  if (documentValue.exists()) {
+    const existingDocumentData =
+      documentValue.data() as DbBaseDocumentConverted<DbPageProductSelectorsDocument>;
+
+    payload.createdBy = existingDocumentData.createdBy;
+    payload.createdAt = existingDocumentData.createdAt;
+  }
 
   await setDoc(documentRef, payload);
 };

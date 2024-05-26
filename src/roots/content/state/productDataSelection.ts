@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { PageProductDataSelectors } from "@src/types/pageProductDataWithSelctors";
+import { PageProductDataSelectors } from "@src/types/pageProductDataWithSelectors";
 import { PageProductData } from "@src/types/pageProductData";
 import { ElementSelector } from "@src/types/selectors";
 

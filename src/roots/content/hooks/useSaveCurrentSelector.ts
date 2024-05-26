@@ -2,7 +2,7 @@ import { useProductDataSelection } from "@src/roots/content/state/productDataSel
 import { useUiMode } from "@src/roots/content/state/uiMode";
 import { ElementSelector } from "@src/types/selectors";
 import { useCallback } from "react";
-import { SaveProductDataSelectorBackgroundCommand } from "@src/types/commands/background";
+import { CachePageProductSelectorBackgroundCommand } from "@src/types/commands/background";
 
 export const useSaveCurrentSelector = () => {
   const activeSelector = useUiMode((state) => state.activeSelector);
@@ -19,7 +19,7 @@ export const useSaveCurrentSelector = () => {
       setActiveSelector(null);
 
       await chrome.runtime.sendMessage(
-        new SaveProductDataSelectorBackgroundCommand(activeSelector, selector),
+        new CachePageProductSelectorBackgroundCommand(activeSelector, selector),
       );
     },
     [activeSelector, saveCurrentSelector, setActiveSelector],

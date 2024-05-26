@@ -1,5 +1,5 @@
 import React from "react";
-import { PageProductDataFieldSelectors } from "@src/types/pageProductDataWithSelctors";
+import { PageProductDataFieldSelectors } from "@src/types/pageProductDataWithSelectors";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { CrosshairIcon } from "lucide-react";
@@ -9,12 +9,14 @@ import { PageProductData } from "@src/types/pageProductData";
 
 export type ProductSelectionInputProps = Partial<PageProductDataFieldSelectors> & {
   selectorKey: keyof PageProductData;
+  optional?: boolean
 };
 
 export const ProductDataSelectionInput = ({
   selectorKey,
   selector,
   readValue,
+  optional = false,
 }: ProductSelectionInputProps): JSX.Element => {
   const setActiveSelector = useUiMode((state) => state.setActiveSelector);
 

@@ -12,11 +12,12 @@ import { ProductDataSelectionInput } from "@src/roots/content/components/Product
 import { useProductDataSelection } from "@src/roots/content/state/productDataSelection";
 import { useUiMode } from "@src/roots/content/state/uiMode";
 import { useToast } from "@/components/ui/use-toast";
+import { PersistProductDataSelectorBackgroundCommand } from "@src/types/commands/background";
 
 export const ProductDataSelectionForm = (): JSX.Element => {
   const { toast } = useToast();
 
-  const selectors = useProductDataSelection((state) => state.values);
+  const selection = useProductDataSelection((state) => state.values);
   const setSelectionMode = useUiMode((state) => state.setSelectionMode);
 
   const onCancel = () => {
@@ -31,9 +32,11 @@ export const ProductDataSelectionForm = (): JSX.Element => {
     });
 
     setSelectionMode(false);
+
+    await chrome.runtime.sendMessage(new PersistProductDataSelectorBackgroundCommand());
   };
 
-  const hasAllSelectors = selectors["title"] && selectors["unit"] && selectors["price"];
+  const hasAllSelectors = selection["title"] && selection["price"];
 
   return (
     <Card className="w-[350px] absolute top-8 right-8">
@@ -44,21 +47,22 @@ export const ProductDataSelectionForm = (): JSX.Element => {
       <CardContent>
         <div className="grid w-full items-center gap-4">
           <ProductDataSelectionInput
-            readValue={selectors["title"]?.readValue}
-            selector={selectors["title"]?.selector}
+            readValue={selection["title"]?.readValue}
+            selector={selection["title"]?.selector}
             selectorKey="title"
           />
 
           <ProductDataSelectionInput
-            readValue={selectors["price"]?.readValue}
-            selector={selectors["price"]?.selector}
+            readValue={selection["price"]?.readValue}
+            selector={selection["price"]?.selector}
             selectorKey="price"
           />
 
           <ProductDataSelectionInput
-            readValue={selectors["unit"]?.readValue}
-            selector={selectors["unit"]?.selector}
+            readValue={selection["unit"]?.readValue}
+            selector={selection["unit"]?.selector}
             selectorKey="unit"
+            optional
           />
         </div>
       </CardContent>
