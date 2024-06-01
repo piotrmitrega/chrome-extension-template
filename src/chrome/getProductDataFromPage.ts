@@ -8,17 +8,28 @@ function fetchProductData(selectors: ProductSelectors) {
       .singleNodeValue;
   };
 
-  const { price: priceSelector, title: titleSelector, unit: unitSelector } = selectors;
+  const {
+    price: priceSelector,
+    title: titleSelector,
+    unit: unitSelector,
+    imageUrl: imageSelector,
+  } = selectors;
 
   const price = getElementByXpath(priceSelector.xpath)?.textContent;
   const title = getElementByXpath(titleSelector.xpath)?.textContent;
+  const image = (getElementByXpath(imageSelector.xpath) as Element)?.getAttribute("src");
   const unit = unitSelector ? getElementByXpath(unitSelector.xpath)?.textContent : undefined;
 
-  return {
+  const fetchedData = {
     price,
     title,
     unit,
+    image,
   };
+
+  console.log("Fetched product data", fetchedData);
+
+  return fetchedData;
 }
 
 export const getProductDataFromPage = async (

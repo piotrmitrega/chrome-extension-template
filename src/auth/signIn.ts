@@ -1,7 +1,7 @@
 import { firebaseGoogleSignIn } from "@src/firebase/firebaseGoogleSignIn";
 
 export const signIn = async () => {
-  console.log("Trying to authenticate from cache");
+  console.log("Signing in");
 
   const { token } = await chrome.identity.getAuthToken({ interactive: true });
   if (chrome.runtime.lastError || !token) {

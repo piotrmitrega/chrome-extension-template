@@ -59,6 +59,12 @@ export const ProductDataSelectionForm = (): JSX.Element => {
           />
 
           <ProductDataSelectionInput
+            readValue={selection["imageUrl"]?.readValue}
+            selector={selection["imageUrl"]?.selector}
+            selectorKey="imageUrl"
+          />
+
+          <ProductDataSelectionInput
             readValue={selection["unit"]?.readValue}
             selector={selection["unit"]?.selector}
             selectorKey="unit"

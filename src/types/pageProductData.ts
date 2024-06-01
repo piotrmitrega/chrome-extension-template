@@ -1,6 +1,7 @@
 export type PageProductData = {
-  title: string;
+  imageUrl: string;
   price: string;
+  title: string;
   unit: string;
 };
 

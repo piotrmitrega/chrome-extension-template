@@ -7,4 +7,5 @@ export type ProductSelectors = {
   price: ElementSelector;
   title: ElementSelector;
   unit: ElementSelector;
+  imageUrl: ElementSelector
 };

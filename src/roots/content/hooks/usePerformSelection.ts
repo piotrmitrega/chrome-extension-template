@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef } from "react";
-import {} from "xpath";
 import { xPathFromElement } from "@src/utils/xPathFromElement";
 import { useSaveCurrentSelector } from "@src/roots/content/hooks/useSaveCurrentSelector";
 import { cssSelectorFromElement } from "@src/utils/cssSelectorFromElement";
