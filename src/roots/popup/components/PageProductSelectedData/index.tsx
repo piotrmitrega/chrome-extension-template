@@ -2,11 +2,11 @@ import React from "react";
 import { useGetPageProductData } from "@src/roots/popup/hooks/useGetPageProductData";
 import { PageProductDataFailedToFetch } from "@src/roots/popup/components/PageProductDataFailedToFetch";
 import { usePageProductData } from "@src/roots/popup/state/pageProductData";
-import { Alert, AlertDescription, AlertTitle } from "../../../../../@/components/ui/alert";
-import { AspectRatio } from "../../../../../@/components/ui/aspect-ratio";
-import { ImageOff } from "lucide-react";
+import { Alert } from "../../../../../@/components/ui/alert";
+import { ProductAvatar } from "@src/roots/popup/components/products/ProductAvatar";
+import { Button } from "../../../../../@/components/ui/button";
 
-export const PageProductSelectedData = (): JSX.Element => {
+export const PageProductSelectedData = (): JSX.Element | null => {
   useGetPageProductData();
 
   const isLoading = usePageProductData((state) => state.isLoading);
@@ -31,18 +31,26 @@ export const PageProductSelectedData = (): JSX.Element => {
 
   return (
     <Alert>
-      {data?.imageUrl ? (
-        <AspectRatio ratio={1}>
-          <img src={data.imageUrl} />
-        </AspectRatio>
-      ) : (
-        <ImageOff className="h-4 w-4" />
-      )}
+      <div className="flex items-center">
+        <ProductAvatar src={data.imageUrl} />
 
-      <AlertTitle>{data?.title}</AlertTitle>
-      <AlertDescription>
-        {data?.price}${data?.currency} / {data?.unit}
-      </AlertDescription>
+        <div className="ml-4 space-y-0.5">
+          <p className="text-sm font-medium leading-none">{data.title}</p>
+          <p className="text-sm text-muted-foreground">
+            {data.price}
+            {data.currency} / {data.unit}
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-4 flex items-center justify-between gap-4">
+        <Button className="flex-1" variant="default">
+          Submit
+        </Button>
+        <Button className="flex-1" variant="outline">
+          Cancel
+        </Button>
+      </div>
     </Alert>
   );
 };

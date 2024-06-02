@@ -10,7 +10,7 @@ export const HomePage = (): JSX.Element => {
   useCheckCurrentPageProductSelectors();
 
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 text-center h-full p-3">
+    <div className="absolute top-0 left-0 right-0 bottom-0 h-full p-3">
       <PageProductData />
       Signed in as {user?.displayName}
       <SignOutButton />
