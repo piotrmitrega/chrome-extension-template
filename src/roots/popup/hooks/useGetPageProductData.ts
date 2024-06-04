@@ -1,18 +1,18 @@
 import { useEffectAsync } from "@src/common/hooks/useEffectAsync";
-import { usePageProductSelectors } from "@src/roots/popup/state/pageProductSelectors";
+import { usePageProductSelectorsState } from "@src/roots/popup/state/pageProductSelectors";
 import { PageProductData } from "@src/types/pageProductData";
 import { getProductDataFromPage } from "@src/chrome/getProductDataFromPage";
 import { getActiveTab } from "@src/chrome/tabs";
 import { validatePageProductData } from "@src/utils/validatePageProductData";
 import { convertPageProductToDocumentData } from "@src/utils/convertPageProductToDocumentData";
-import { usePageProductData } from "@src/roots/popup/state/pageProductData";
+import { usePageProductDataState } from "@src/roots/popup/state/pageProductData";
 
 export const useGetPageProductData = () => {
-  const selectors = usePageProductSelectors((state) => state.selectors);
-  const setData = usePageProductData((state) => state.setData);
+  const selectors = usePageProductSelectorsState((state) => state.selectors);
+  const setData = usePageProductDataState((state) => state.setData);
 
-  const setLoading = usePageProductData((state) => state.setLoading);
-  const setFailed = usePageProductData((state) => state.setFailed);
+  const setLoading = usePageProductDataState((state) => state.setLoading);
+  const setFailed = usePageProductDataState((state) => state.setFailed);
 
   useEffectAsync(async () => {
     const tab = await getActiveTab();

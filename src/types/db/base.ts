@@ -6,6 +6,7 @@ export type DbBaseDocumentRaw<TData> = {
 } & TData;
 
 export type DbBaseDocumentConverted<TData> = {
+  id: string;
   createdAt: Date;
   updatedAt: Date;
 } & TData;

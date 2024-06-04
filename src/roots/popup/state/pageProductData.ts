@@ -21,7 +21,7 @@ const initialState = {
   hasFailed: false,
 };
 
-export const usePageProductData = create<PageProductDataState>((set) => ({
+export const usePageProductDataState = create<PageProductDataState>((set) => ({
   ...initialState,
   reset: () => set(initialState),
   setLoading: (isLoading: boolean) => set({ isLoading }),

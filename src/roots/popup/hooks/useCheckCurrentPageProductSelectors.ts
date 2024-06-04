@@ -1,12 +1,12 @@
 import { getActiveTab } from "@src/chrome/tabs";
 import { useEffectAsync } from "@src/common/hooks/useEffectAsync";
-import { usePageProductSelectors } from "@src/roots/popup/state/pageProductSelectors";
+import { usePageProductSelectorsState } from "@src/roots/popup/state/pageProductSelectors";
 import { getCachedProductSelectors } from "@src/chrome/cachedSelectors";
 import { validateProductSelectors } from "@src/utils/validateProductSelectors";
 import { getPageProductSelectorDocument } from "@src/firebase/db/pageProductSelector";
 
 export const useCheckCurrentPageProductSelectors = () => {
-  const setSelectors = usePageProductSelectors((state) => state.setSelectors);
+  const setSelectors = usePageProductSelectorsState((state) => state.setSelectors);
 
   // TODO: Listen to url changes
   useEffectAsync(async () => {

@@ -7,7 +7,7 @@ type PageProductSelectorsState = {
   isLoading: boolean;
 };
 
-export const usePageProductSelectors = create<PageProductSelectorsState>((set) => ({
+export const usePageProductSelectorsState = create<PageProductSelectorsState>((set) => ({
   selectors: null,
   isLoading: true,
   setSelectors: (selectors?: ProductSelectors) => set({ selectors, isLoading: false }),

@@ -34,7 +34,7 @@ export const convertPageProductToDocumentData = (
   console.log("TODO: Unit parsing", unit);
 
   return {
-    imageUrl,
+    imageUrl: imageUrl ?? null,
     price,
     title,
     unit: ProductUnitType.PIECE,
