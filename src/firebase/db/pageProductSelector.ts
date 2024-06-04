@@ -5,7 +5,7 @@ import {
   DbPageProductSelectorsDocumentData,
 } from "@src/types/db/selectors";
 import { getBaseConverter } from "@src/firebase/db/base";
-import { setDoc, Timestamp } from "firebase/firestore";
+import { setDoc } from "firebase/firestore";
 import { DbBaseDocumentConverted } from "@src/types/db/base";
 import { ProductSelectors } from "@src/types/selectors";
 import { User } from "@firebase/auth";
