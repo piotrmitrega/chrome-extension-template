@@ -39,14 +39,12 @@ export const upsertPageProductSelectorDocument = async (
     getBaseConverter<DbPageProductSelectorsDocumentData>(),
   );
 
-  const payload: DbBaseDocumentConverted<DbPageProductSelectorsDocument> = {
+  const payload: DbPageProductSelectorsDocumentData = {
     hostname: url.hostname,
     sourceUrl: urlWithoutQuery,
     selectors,
     updatedBy: user.uid,
     createdBy: user.uid,
-    createdAt: Timestamp.now().toDate(),
-    updatedAt: Timestamp.now().toDate(),
   };
 
   const documentValue = await getDoc(documentRef);
@@ -55,7 +53,6 @@ export const upsertPageProductSelectorDocument = async (
       documentValue.data() as DbBaseDocumentConverted<DbPageProductSelectorsDocument>;
 
     payload.createdBy = existingDocumentData.createdBy;
-    payload.createdAt = existingDocumentData.createdAt;
   }
 
   await setDoc(documentRef, payload);
